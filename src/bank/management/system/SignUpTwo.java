@@ -8,11 +8,11 @@ package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import com.toedter.calendar.JDateChooser;
+//import com.toedter.calendar.JDateChooser;
 import java.awt.event.*;
 
 import java.awt.event.*;
-public class SignUpOne extends JFrame implements ActionListener{
+public class SignUpTwo extends JFrame implements ActionListener{
     
     
     long random;
@@ -20,9 +20,9 @@ public class SignUpOne extends JFrame implements ActionListener{
 //    JLabel name,fname,dob,email,city,state,address,marrital,pincode;
     JButton next,back;
     JRadioButton marriedtxt,unmarriedtxt;
-    JDateChooser dobtxt;
     
-    SignUpOne(){
+    
+    SignUpTwo(){
         setLayout(null);
         
         Random ran = new Random();
@@ -64,9 +64,7 @@ public class SignUpOne extends JFrame implements ActionListener{
         
 //         JTextField domtxt= new JTextField();
 
-    dobtxt = new JDateChooser();
-    dobtxt.setBounds(380, 270, 300, 30);
-    add(dobtxt);
+
 
 
         
@@ -214,6 +212,6 @@ public void actionPerformed(ActionEvent ae){
 
     
     public static void main(String args[]) {
-        new SignUpOne();
+        new SignUpTwo();
     }
 }
