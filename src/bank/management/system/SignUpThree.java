@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+
 public class SignUpThree extends JFrame implements ActionListener{
     long random;
     JRadioButton saving,fixed,current,recurring;
@@ -16,7 +17,7 @@ public class SignUpThree extends JFrame implements ActionListener{
     
     SignUpThree(String formnos){
         setLayout(null);
-        this.formno=formnos;
+        formno=formnos;
         
         JLabel AccountDetails = new JLabel("Page 3: Account Details");
         AccountDetails.setBounds(250,30,300,30);
@@ -87,7 +88,7 @@ public class SignUpThree extends JFrame implements ActionListener{
         pindet.setFont(new Font("Railway",Font.BOLD,10));
         add(pindet);
         
-         pinval=new JPasswordField();
+        pinval=new JPasswordField();
         pinval.setBounds(360,300,200,50);
         add(pinval);
         
@@ -153,6 +154,8 @@ public class SignUpThree extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==submit){
             
+            System.out.println(formno);
+            
             String account=null;
             if(saving.isSelected()){
                 account="Saving";
@@ -165,42 +168,74 @@ public class SignUpThree extends JFrame implements ActionListener{
             }
             
             String card=cardval.getText();
-            String pin=pinval.getText();
+            char[] pins=pinval.getPassword();
+            String pinn= new String();
+            String pin= pinn.valueOf(pins);
+            System.out.println(pin);
             
             String atmval=null;
             if(atm.isSelected()){
                  atmval="Yes";
+            }else{
+                atmval="No";
             }
             String internetval=null;
             if(internet.isSelected()){
                  internetval="Yes";
+            }else{
+               internetval="No";
             }
              String emailval=null;
             if(email.isSelected()){
                  emailval="Yes";
+            }else{
+                emailval="No";
             }
              String chequeval=null;
             if(cheque.isSelected()){
                  chequeval="Yes";
+            }else{
+                chequeval="No";
             }
              String mobileval=null;
             if(mobile.isSelected()){
                  mobileval="Yes";
+            }else{
+                mobileval="No";
             }
              String estatementval=null;
             if(estatement.isSelected()){
                  estatementval="Yes";
+            }else{
+                estatementval="No";
             }
             
-            
+          try{  
            //inserting in database 
             if(agree.isSelected()){
                 Conn c= new Conn();
-                String query="insert into signUpThree values('"+formno+"','"+account+"','"+card+"','"+pin+"','"+atmval+"','"+mobileval+"'"
-                        + "'"+internetval+"','"+emailval+"','"+estatementval+"','"+chequeval+"')";
+
+                
+                String query = "insert into signupthree(formno, account,card, pin, atm, mobile, internet, email, estatement, cheque) "
+             + "values ('" + formno + "','" + account + "','" + card + "','" + pin + "','" + atmval + "','"
+             + mobileval + "','" + internetval + "','" + emailval + "','" + estatementval + "','" + chequeval + "')";
+
+                 
+                
+                c.s.executeUpdate(query);
+                
+                setVisible(false);
+                
+                
+                
+                
             }else{
                 JOptionPane.showMessageDialog(null,"Please Agree to the Commitment ");
             }
+          }catch(Exception e){
+//              
+e.printStackTrace();
+          }
             
         }
     }
