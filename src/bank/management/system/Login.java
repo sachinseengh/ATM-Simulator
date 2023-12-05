@@ -3,12 +3,13 @@ package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener {
     JTextField cardtxt;
     JPasswordField pintxt;
     JButton clear,signin,signup;
-    
+    JLabel cardnumber,pin;
    Login(){
         setLayout(null);
         setTitle("AUTOMATED TELLER MACHINE");
@@ -31,12 +32,12 @@ public class Login extends JFrame implements ActionListener {
         welcometext.setBounds(240,20,500,100);
         add(welcometext);
         
-        JLabel cardnumber = new JLabel("Card No. :");
+        cardnumber = new JLabel("Card No. :");
         cardnumber.setFont(new Font("Osward",Font.BOLD,28));
         cardnumber.setBounds(130,150,300,50);
         add(cardnumber);
         
-        JLabel pin= new JLabel("Pin :");
+        pin= new JLabel("Pin :");
         pin.setFont(new Font("Osward",Font.BOLD,28));
         pin.setBounds(130,200,300,50);
         add(pin);
@@ -84,13 +85,34 @@ public class Login extends JFrame implements ActionListener {
        }else if(e.getSource() == signup){
            setVisible(false);
            new SignUpOne().setVisible(true);
+       }else if(e.getSource()==signin){
+          
+           String cardval=cardtxt.getText();
+           String pinval=pintxt.getText();
+           
+         try{  
+            Conn c= new Conn();
+           String query="select * from signupthree where card="+cardval+" and pin="+pinval+"";
+
+           
+           ResultSet rs=c.s.executeQuery(query);
+           if(rs.next()){
+               setVisible(false);
+               new Transaction(pinval).setVisible(true);
+           }else{
+               JOptionPane.showMessageDialog(null,"Incorrect Card No or PIN");
+           }
+       }catch(Exception ae){
+           System.out.print(ae);
        }
+   }
    }
    public static void main(String args[]) {	   
        new Login();	  
-   }	
+   }
+}
 
   
-}
+
 
 

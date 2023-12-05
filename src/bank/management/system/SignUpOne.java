@@ -21,7 +21,7 @@ public class SignUpOne extends JFrame implements ActionListener{
     JButton next,back;
     JRadioButton marriedtxt,unmarriedtxt;
     JDateChooser dobtxt;
-    
+    String formno;
     SignUpOne(){
         setLayout(null);
         
@@ -171,8 +171,8 @@ public void actionPerformed(ActionEvent ae){
     if(ae.getSource()==next){
   
     
-   String formno = " "+random;//converted to string
-   System.out.println(formno);
+   formno = " "+random;//converted to string
+   
    
    String name = nametxt.getText();
    String fname= fnametxt.getText();
@@ -197,20 +197,28 @@ public void actionPerformed(ActionEvent ae){
            JOptionPane.showMessageDialog(null,"Name is Empty");
        }else{
            Conn c = new Conn();
-           String query ="insert into signup(formno,name,dob,fname,marrital,email,city,state,address,pincode) values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+marrital+"','"+email+"','"
+           String query ="insert into signupone(formno,name,dob,fname,marrital,email,city,state,address,pincode) "
+                   + "values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+marrital+"','"+email+"','"
                    +city+"','"+state+"','"+address+"','"+pincode+"')";
            
            c.s.executeUpdate(query);
+           
+           setVisible(false);
+           new SignUpTwo(formno).setVisible(true);
        }
    }catch(Exception e){
        System.out.println(e);
    }
+   
+   
     }else if(ae.getSource()==back){
         setVisible(false);
         new Login().setVisible(true);
+        
+    }
     }
        
-}
+
 
     
     public static void main(String args[]) {
