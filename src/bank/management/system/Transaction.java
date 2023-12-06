@@ -4,6 +4,7 @@ package bank.management.system;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
 public class Transaction extends JFrame implements ActionListener{
     
     JButton deposit,withdrawl,fastcash,balanceenquiry,ministatement,exit,pinchange;
@@ -56,7 +57,7 @@ String pinval;
         
         withdrawl = new JButton("Cash Withdrawl");
        withdrawl.setBounds(350,400,150,30);
-       pinchange.addActionListener(this);
+       withdrawl.addActionListener(this);
         image.add(withdrawl);
         
         ministatement= new JButton("Mini Statement");
@@ -83,13 +84,14 @@ String pinval;
     
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==deposit){
-            
+            new Deposit(pinval).setVisible(true);
         }else if(ae.getSource()==withdrawl){
             
+            setVisible(false);
+            new Withdrawl(pinval).setVisible(true);
         }else if(ae.getSource()==fastcash){
-            
-        }else if(ae.getSource()==withdrawl){
-            
+            setVisible(false);
+            new FastCash(pinval).setVisible(true);
         }else if(ae.getSource()==pinchange){
             
         }else if(ae.getSource()==ministatement){

@@ -1,9 +1,12 @@
 
 package bank.management.system;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
+import java.sql.*;
+import java.util.Date;
+
 public class FastCash extends JFrame implements ActionListener{
     
     JButton deposit,withdrawl,fastcash,balanceenquiry,ministatement,exit,pinchange;
@@ -30,46 +33,46 @@ String pinval;
         add(image);
         
         
-        JLabel text= new JLabel("Please Select your Transaction");
-        text.setBounds(210,300,700,35);
+        JLabel text= new JLabel("Select Withdrawl Amount");
+        text.setBounds(250,300,700,35);
         //To Add Text on the image
         text.setForeground(Color.WHITE);
         text.setFont(new Font("System",Font.BOLD,16));
         image.add(text);
         
         
-        deposit = new JButton("Deposit");
+        deposit = new JButton("Rs 500");
         deposit.setBounds(170,400,150,30);
         deposit.addActionListener(this);
         image.add(deposit);
         
-         fastcash = new JButton("Fast Cash");
+         fastcash = new JButton("Rs 1000");
         fastcash.setBounds(170,440,150,30);
         fastcash.addActionListener(this);
         image.add(fastcash);
         
-        pinchange = new JButton("Pin Change");
+        pinchange = new JButton("Rs 2000");
         pinchange.setBounds(170,480,150,30);
         pinchange.addActionListener(this);
         image.add(pinchange);
         
         
-        withdrawl = new JButton("Cash Withdrawl");
+        withdrawl = new JButton("Rs 5000");
        withdrawl.setBounds(350,400,150,30);
        withdrawl.addActionListener(this);
         image.add(withdrawl);
         
-        ministatement= new JButton("Mini Statement");
+        ministatement= new JButton("Rs 10000");
        ministatement.setBounds(350,440,150,30);
        ministatement.addActionListener(this);
         image.add(ministatement);
         
-        balanceenquiry= new JButton("Balance Enquiry");
+        balanceenquiry= new JButton("Rs 25000");
         balanceenquiry.setBounds(350,480,150,30);
         balanceenquiry.addActionListener(this);
         image.add(balanceenquiry);
         
-        exit= new JButton("Exit");
+        exit= new JButton("Back");
         exit.setBounds(350,520,150,30);
         exit.addActionListener(this);
         image.add(exit);
@@ -82,20 +85,40 @@ String pinval;
     }
     
     public void actionPerformed(ActionEvent ae){
-        if(ae.getSource()==deposit){
-            new Deposit(pinval).setVisible(true);
-        }else if(ae.getSource()==withdrawl){
+      
+        if(ae.getSource()==exit){
+          setVisible(false);
+          new Transaction(pinval).setVisible(true);
+        }else{
+            String amount=((JButton)ae.getSource()).getText().substring(3);
             
+            try{
+                Conn c= new Conn();
+                ResultSet rs = c.s.executeQuery("select * from bank where pin='"+pinval+"'");
+                int balance=0;
+                while(rs.next()){
+                    if(rs.getString("type").equals("Deposit")){
+                        balance += Integer.parseInt(rs.getString("amount"));
+                    }else{
+                        balance += Integer.parseInt(rs.getString("amount"));
+                    }
+                }
+                
+                if(ae.getSource() !=exit && balance< Integer.parseInt(amount)){
+                    JOptionPane.showMessageDialog(null,"InSufficient Balance");
+                    return;
+                }else{
+                    Date date = new Date();
+                    String query="insert into bank values ('"+pinval+"','"+date+"','Withdraw','"+amount+"')";
+            c.s.executeUpdate(query);
+            JOptionPane.showMessageDialog(null,"Rs "+amount+"Withdrawl Successfully");
             setVisible(false);
-            new Withdrawl(pinval).setVisible(true);
-        }else if(ae.getSource()==fastcash){
-            
-        }else if(ae.getSource()==pinchange){
-            
-        }else if(ae.getSource()==ministatement){
-            
-        }else if(ae.getSource()==exit){
-            System.exit(0);
+            new Transaction(pinval).setVisible(true);
+                }
+                
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
     }
   

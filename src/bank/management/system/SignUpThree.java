@@ -154,7 +154,7 @@ public class SignUpThree extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==submit){
             
-            System.out.println(formno);
+            
             
             String account=null;
             if(saving.isSelected()){
@@ -220,12 +220,13 @@ public class SignUpThree extends JFrame implements ActionListener{
              + "values ('" + formno + "','" + account + "','" + card + "','" + pin + "','" + atmval + "','"
              + mobileval + "','" + internetval + "','" + emailval + "','" + estatementval + "','" + chequeval + "')";
 
-                 
+                 String query2="insert into login values('"+formno+"','"+card+"','"+pin+"')";
                 
                 c.s.executeUpdate(query);
+                c.s.executeUpdate(query2);
                 
                 setVisible(false);
-                
+                new Deposit(pin).setVisible(true);
                 
                 
                 
