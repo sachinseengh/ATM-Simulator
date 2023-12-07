@@ -98,6 +98,7 @@ public void actionPerformed(ActionEvent ae){
             c.s.executeUpdate(query2);
             c.s.executeUpdate(query3);
             
+            JOptionPane.showMessageDialog(null,"Pin Changed Successfully");
             setVisible(false);
             new Transaction(pin).setVisible(true);
             }

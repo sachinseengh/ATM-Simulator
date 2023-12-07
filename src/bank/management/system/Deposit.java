@@ -70,7 +70,7 @@ public void actionPerformed(ActionEvent ae){
             try{
             Conn c= new Conn();
             
-            String query="insert into bank values ('"+pin+"','"+date+"','Deposit','"+amount+"')";
+            String query="insert into bank (pin,date,type,amount)values ('"+pin+"','"+date+"','Deposit','"+amount+"')";
             c.s.executeUpdate(query);
             
              JOptionPane.showMessageDialog(null, "Rs "+amount+" Deposited Successfully");

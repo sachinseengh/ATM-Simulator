@@ -88,14 +88,18 @@ public class Login extends JFrame implements ActionListener {
        }else if(e.getSource()==signin){
           
            String cardval=cardtxt.getText();
-           String pinval=pintxt.getText();
+//           String pinval=pintxt.getText();
+            char []arr=pintxt.getPassword();
+            String pinval=String.valueOf(arr);
            
          try{  
             Conn c= new Conn();
-           String query="select * from signupthree where card="+cardval+" and pin="+pinval+"";
+           String query="select * from login where cardno="+cardval+" and pin="+pinval+"";
 
            
-           ResultSet rs=c.s.executeQuery(query);
+          ResultSet rs=c.s.executeQuery(query);
+
+      
            if(rs.next()){
                setVisible(false);
                new Transaction(pinval).setVisible(true);
@@ -113,6 +117,4 @@ public class Login extends JFrame implements ActionListener {
 }
 
   
-
-
 

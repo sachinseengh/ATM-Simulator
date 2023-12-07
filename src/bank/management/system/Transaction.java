@@ -12,7 +12,7 @@ String pinval;
     Transaction(String pin){
         setLayout(null);
         this.pinval=pin;
-        
+        System.out.print(pinval);
         
         //Image is inside awt package
         
@@ -85,16 +85,26 @@ String pinval;
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==deposit){
             new Deposit(pinval).setVisible(true);
-        }else if(ae.getSource()==withdrawl){
             
+        }else if(ae.getSource()==withdrawl){   
             setVisible(false);
             new Withdrawl(pinval).setVisible(true);
+            
         }else if(ae.getSource()==fastcash){
             setVisible(false);
             new FastCash(pinval).setVisible(true);
+            
         }else if(ae.getSource()==pinchange){
+            setVisible(false);
+            new PinChange(pinval).setVisible(true);
             
         }else if(ae.getSource()==ministatement){
+            
+            new MiniStatement(pinval).setVisible(true);
+            
+        }else if(ae.getSource()==balanceenquiry){
+            setVisible(false);
+            new BalanceEnquiry(pinval).setVisible(true);
             
         }else if(ae.getSource()==exit){
             System.exit(0);

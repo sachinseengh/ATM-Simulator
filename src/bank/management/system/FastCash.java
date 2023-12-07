@@ -100,7 +100,7 @@ String pinval;
                     if(rs.getString("type").equals("Deposit")){
                         balance += Integer.parseInt(rs.getString("amount"));
                     }else{
-                        balance += Integer.parseInt(rs.getString("amount"));
+                        balance -= Integer.parseInt(rs.getString("amount"));
                     }
                 }
                 
