@@ -67,7 +67,7 @@ public class MiniStatement extends JFrame {
         rs2.getString("amount") );
          
         x=x+30;
-          
+          //increase the y axis length of Jlabel increase by 30 with each data
             
          }
          
