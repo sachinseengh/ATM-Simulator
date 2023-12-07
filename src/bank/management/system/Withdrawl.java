@@ -68,8 +68,11 @@ public void actionPerformed(ActionEvent ae){
          amount = withdraw.getText();
 //        Date is inside util package
         Date date = new Date();
-        if(withdraw.equals("")){
+        if(amount.equals("")){
                         JOptionPane.showMessageDialog(null, "Please Enter the amount");
+                        return;
+        }else if(!isNumeric(amount)){
+               JOptionPane.showMessageDialog(null, "Amount must be numeric");
         }else{
               try{
                 Conn c= new Conn();
@@ -106,6 +109,10 @@ public void actionPerformed(ActionEvent ae){
         new Transaction(pin).setVisible(true);
     }
 }
+ 
+private boolean isNumeric(String str) {
+    return str.matches("\\d+");
+    }
  
     public static void main(String args[]) {
      new Withdrawl("");

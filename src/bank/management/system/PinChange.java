@@ -84,6 +84,15 @@ public void actionPerformed(ActionEvent ae){
         String npinval=String.valueOf(newpin);
         String confirmval=String.valueOf(confirm);
         
+        if(!isNumeric(npinval)  || !isNumeric(confirmval)){
+            JOptionPane.showMessageDialog(null,"Pins must be numeric");
+            return;
+        }
+        if(npinval.length()!=4 || confirmval.length()!=4){
+         JOptionPane.showMessageDialog(null,"Pins can only be of four digits");
+            return;
+        }
+            
         
         if(npinval.equals(confirmval)){
             
@@ -118,6 +127,9 @@ public void actionPerformed(ActionEvent ae){
         new Transaction(pin).setVisible(true);
     }
 }
+ private boolean isNumeric(String str) {
+    return str.matches("\\d+");
+    }
  
     public static void main(String args[]) {
      new PinChange("");

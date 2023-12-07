@@ -86,12 +86,18 @@ public class Login extends JFrame implements ActionListener {
            setVisible(false);
            new SignUpOne().setVisible(true);
        }else if(e.getSource()==signin){
-          
-           String cardval=cardtxt.getText();
-//           String pinval=pintxt.getText();
-            char []arr=pintxt.getPassword();
-            String pinval=String.valueOf(arr);
            
+           
+           
+
+            
+             String cardval = cardtxt.getText();
+        String pinval = String.valueOf(pintxt.getPassword());
+           
+             if (!isNumeric(cardval) || !isNumeric(pinval)) {
+            JOptionPane.showMessageDialog(null, "Card number and PIN must be numeric.");
+            return; // Stop further processing
+        }
          try{  
             Conn c= new Conn();
            String query="select * from login where cardno="+cardval+" and pin="+pinval+"";
@@ -111,6 +117,9 @@ public class Login extends JFrame implements ActionListener {
        }
    }
    }
+   private boolean isNumeric(String str) {
+    return str.matches("\\d+");
+}
    public static void main(String args[]) {	   
        new Login();	  
    }

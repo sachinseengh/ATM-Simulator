@@ -94,7 +94,7 @@ public class MiniStatement extends JFrame {
      
 //     
      
-     setSize(600,600);
+     setSize(600,480);
      setLocation(20,20);
      getContentPane().setBackground(Color.white);
      setVisible(true);

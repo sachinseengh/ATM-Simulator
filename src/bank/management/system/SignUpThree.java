@@ -210,6 +210,16 @@ public class SignUpThree extends JFrame implements ActionListener{
                 estatementval="No";
             }
             
+            if ( pin.length()!=4) {
+            JOptionPane.showMessageDialog(null, "PIN must be of four digits.");
+            return; // Stop further processing
+            }
+            
+            if(!isNumeric(pin)){
+                JOptionPane.showMessageDialog(null, "PIN must be numeric.");
+            return; // Stop further processing
+            }
+            
           try{  
            //inserting in database 
             if(agree.isSelected()){
@@ -239,6 +249,9 @@ e.printStackTrace();
           }
             
         }
+    }
+    private boolean isNumeric(String str) {
+    return str.matches("\\d+");
     }
 
 

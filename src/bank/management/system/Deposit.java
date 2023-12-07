@@ -64,9 +64,16 @@ public void actionPerformed(ActionEvent ae){
         String amount = deposit.getText();
 //        Date is inside util package
         Date date = new Date();
-        if(deposit.equals("")){
- JOptionPane.showMessageDialog(null, "Please Enter the amount");
+        if(amount.equals("")){
+             JOptionPane.showMessageDialog(null, "Please Enter the amount");
+             return;
+        }else if(!isNumeric(amount)){
+            
+        JOptionPane.showMessageDialog(null, "Amount must be Numeric");
+             return;
+        
         }else{
+                      
             try{
             Conn c= new Conn();
             
@@ -87,7 +94,9 @@ public void actionPerformed(ActionEvent ae){
         new Transaction(pin).setVisible(true);
     }
 }
- 
+  private boolean isNumeric(String str) {
+    return str.matches("\\d+");
+    }
     public static void main(String args[]) {
      new Deposit("");
     }

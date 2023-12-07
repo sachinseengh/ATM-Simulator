@@ -109,7 +109,7 @@ String pinval;
                     return;
                 }else{
                     Date date = new Date();
-                    String query="insert into bank values ('"+pinval+"','"+date+"','Withdraw','"+amount+"')";
+                    String query="insert into bank (pin,date,type,amount) values ('"+pinval+"','"+date+"','Withdraw','"+amount+"')";
             c.s.executeUpdate(query);
             JOptionPane.showMessageDialog(null,"Rs "+amount+"Withdrawl Successfully");
             setVisible(false);

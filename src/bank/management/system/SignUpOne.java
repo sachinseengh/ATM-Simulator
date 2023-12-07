@@ -191,6 +191,34 @@ public void actionPerformed(ActionEvent ae){
    String address=addresstxt.getText();
    String pincode=pincodetxt.getText();
    
+   
+   
+   
+   //Fom Validation-------------------------------------------------------------------------------------------------------
+   
+   
+    if (isNumeric(name) || isNumeric(fname) || isNumeric(city) || isNumeric(state) || isNumeric(email)) {
+            JOptionPane.showMessageDialog(null, "Name or Father Name or email or city or state cannot be numeric.");
+            return; // Stop further processing
+        }
+    if(!isNumeric(pincode)){
+         JOptionPane.showMessageDialog(null, "Pincode must be numeric.");
+            return; // Stop further processing
+    }
+   if(containsDigit(name) || containsDigit(fname) || containsDigit(city) || containsDigit(state) ){
+       JOptionPane.showMessageDialog(null, "Name or Father Name or email or city or state cannot Contains number");
+            return; // Stop further processing
+   }
+   if(email.endsWith("@gmail.com" ) || email.endsWith("@yahoo.com")){
+       
+   }else{
+        JOptionPane.showMessageDialog(null, "Invalid email");
+            return; // Stop further processing
+   }
+   
+   //------------------------------------------------------------------------------------------------------------------------
+   
+   
    try{
        if(name.equals("")){
            //Do the same for other filed as well;
@@ -218,7 +246,12 @@ public void actionPerformed(ActionEvent ae){
     }
     }
        
-
+private boolean isNumeric(String str) {
+    return str.matches("\\d+");
+}
+private boolean containsDigit(String name) {
+    return name.matches(".*\\d.*");
+}
 
     
     public static void main(String args[]) {
